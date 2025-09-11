@@ -5,6 +5,8 @@ Primitives -> when we get a real copy of the values
 Reference -> when we get reference of the values not the not a copy 
 --> arrays, objects, functions
     [] {} ()
+
+javascript is a dynamically typed language (type of the data can be changed in the variable)
 */
 
 let a = 34;
@@ -115,4 +117,4 @@ const object = {
 let ui = Symbol('uid');
 object[ui] = "18";
 
-console.log(object)
+console.log(object);
