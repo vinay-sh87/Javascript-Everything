@@ -100,3 +100,101 @@ const repeatTask = (times, task) => {
     }
 };
 repeatTask(3, i => console.log(`Reminder ${i + 1} : drink water!`)); // i is the task or the callback 
+
+
+// pure vs impure functions 
+// pure function -- function that does not changes the outer values 
+let val = 0;
+function abcd() {
+    console.log('Hii');
+}
+
+// impure function -- function that does change the outer values 
+function f() {
+    ++val;
+}
+f();
+console.log(val)
+
+
+// hoisting works in the case of normal function not in function expression (where a function is stored in a variable)
+// closures
+// function that returns a function and the function which is getting returned should use variable of parent function 
+const outer = () => {
+    let counter = 0;
+    return inner = () => {
+        ++counter;
+        console.log(counter);
+    }
+}
+const fun = outer();
+fun();
+
+// lexical scope -- scope where the variable is accessible
+function a() {
+    let x = 0; // lexical scope of x 134 -- 141 line
+    function b() {
+        let y = 0;
+        function c() {
+            let z = 0;
+            console.log(x, y, z);
+        }
+    }
+}
+
+function createBankAccount() {
+    let balance = 0;
+    return {
+        deposit(amount) { balance += amount; },
+        withdraw(amount) { balance -= amount; },
+        getBalance() { return balance; }
+    }
+}
+const myAccount = createBankAccount();
+myAccount.deposit(1000);
+console.log(myAccount.getBalance());
+
+// IIFE (Immediately Invoked Function Expression) -- function that runs as soon as it is defined.
+(() => {
+    console.log("IIFE");
+})();
+
+const appConfig = (() => {
+    const apiKey = 'ABC122';
+    const apiUrl = 'https://api.com';
+
+    return {
+        getKey: () => {
+            return apiKey;
+        },
+        getUrl: () => {
+            return apiUrl;
+        }
+    }
+})();
+console.log(appConfig.getKey()); // get data of apiKey using function
+console.log(appConfig.getUrl()); // get data of apiUrl using function
+// console.log(apiKey); // can't directly access
+
+// Shoping cart module
+const shopingCart = (() => {
+    let cart = [];
+
+    return {
+        addItem: (item) => {
+            cart.push(item);
+        },
+        getItems: () => {
+            return cart;
+        },
+        clearCart: () => {
+            cart = [];
+
+        }
+    }
+})();
+shopingCart.addItem('shirt');
+shopingCart.addItem('phone');
+console.log(shopingCart.getItems());
+shopingCart.clearCart();
+console.log(shopingCart.getItems());
